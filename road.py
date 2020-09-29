@@ -12,22 +12,31 @@ pygame.display.set_caption('Road Fighter')
 player = pygame.image.load('./sprites/player.png')
 player = pygame.transform.scale(player, (int(displayWidth/20), int(displayHeight/20)))
 
-initialX = 400
-initialY = 400
+currentX = 400
+currentY = 400
+speed = 10
 
 def setPlayerPosition(x, y):
     gameDisplay.blit(player, (x, y))
-
-def controller(key):
-
+    
 while True:
+    pygame.time.delay(100)
+
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
 
-        if event.type == KEYDOWN:
-            controller(event.key)
-    
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_UP]:
+        currentY -= speed
+    if keys[pygame.K_DOWN]:
+        currentY += speed
+    if keys[pygame.K_LEFT]:
+        currentX -= speed
+    if keys[pygame.K_RIGHT]:
+        currentX += speed
+
+    gameDisplay.fill((0,0,0))
     setPlayerPosition(currentX, currentY)
-       
     pygame.display.update()
