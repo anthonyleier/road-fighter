@@ -15,17 +15,18 @@ player = pygame.transform.scale(player, (int(displayWidth/20), int(displayHeight
 
 fpsClock = pygame.time.Clock()
 
-FPS = 1000
+FPS = 60
+speed = 10
+delay = 10
 currentX = 400
 currentY = 400
-speed = 5
 
 def setPlayerPosition(x, y):
     gameDisplay.blit(player, (x, y))
     
 while True:
-    fpsClock.tick(30)
-    pygame.time.delay(100)
+    fpsClock.tick(FPS)
+    pygame.time.delay(delay)
 
     for event in pygame.event.get():
         if event.type == QUIT:
