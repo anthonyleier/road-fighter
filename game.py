@@ -14,7 +14,7 @@ pygame.display.set_caption('Road Fighter')
 fpsClock = pygame.time.Clock()
 FPS = 120
 
-playerImage = pygame.transform.scale(pygame.image.load('./sprites/player.png'), (int(displayWidth/20), int(displayHeight/20)))
+playerImage = pygame.image.load('./sprites/player.png')
 roadImage = pygame.image.load('./sprites/road.png').convert()
 
 playerX = int(displayHeight / 2)
