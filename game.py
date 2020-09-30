@@ -21,10 +21,17 @@ roadImage = pygame.image.load('./sprites/road.png').convert()
 
 playerX = int(displayHeight / 2)
 playerY = int(displayWidth * 3/4)
-enemyX = 400
-enemyY = 400
 playerSpeed = 10
 roadSpeed = 0
+
+enemyX = 400
+enemyY = 400
+enemyBrake = 0
+enemyEngine = 0
+enemyMaxSpeed = 15
+enemyCooldown = 1
+
+last = pygame.time.get_ticks()
 
 def events():
     for event in pygame.event.get():
@@ -32,6 +39,7 @@ def events():
             pygame.quit()
 
 while play:
+    now = pygame.time.get_ticks()
     fpsClock.tick(FPS)
     events()
 
@@ -42,8 +50,16 @@ while play:
         playerX += playerSpeed
     if keys[pygame.K_z]:
         roadSpeed += 10
+        enemyY += 1
+    else:
+        enemyY -= 3
 
     road.roadPrinter(gameDisplay, displayHeight, roadImage, roadSpeed)
+
+    if now - last >= enemyCooldown:
+        last = now
+        print("oi")
+        enemy.enemyPrinter(gameDisplay, enemyImage, enemyX, enemyY)
+
     player.playerPrinter(gameDisplay, playerImage, playerX, playerY)
-    enemy.enemyPrinter(gameDisplay, enemyImage, enemyX, enemyY)
     pygame.display.update()
