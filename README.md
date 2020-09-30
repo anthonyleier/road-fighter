@@ -1,3 +1,3 @@
-# Road Fighter Endless
+# Road Fighter
 
-Project to develop a version of Road Fighter, but endless using Pygame.
+Project to develop a version of Road Fighter using Pygame.
