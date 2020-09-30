@@ -1,7 +1,7 @@
 import pygame
-import objects.road as road
-import objects.player as player
-import objects.enemy as enemy
+from objects.road import Road
+from objects.player import Player
+from objects.enemy import Enemy
 from pygame.locals import *
 
 #Env Variables
@@ -23,9 +23,9 @@ enemyImage = pygame.image.load('./sprites/enemy.png')
 roadImage = pygame.image.load('./sprites/road.png').convert()
 
 #Define Objects
-player1 = player.Player(gameDisplay, playerImage, displayDimensions)
-mainRoad = road.Road(gameDisplay, roadImage, displayHeight)
-enemy1 = enemy.Enemy(gameDisplay, enemyImage, 400, 400)
+player1 = Player(gameDisplay, playerImage, displayDimensions)
+road = Road(gameDisplay, roadImage, displayHeight)
+enemy1 = Enemy(gameDisplay, enemyImage, 400, 400)
 
 #Start Time
 last = pygame.time.get_ticks()
@@ -50,13 +50,13 @@ while play:
     if keys[pygame.K_RIGHT]:
         player1.right()
     if keys[pygame.K_z]:
-        mainRoad.update(10)
+        road.update(10)
         enemy1.slow()
     else:
         enemy1.fast()
 
     #Spawn Objects
-    mainRoad.spawn()
+    road.spawn()
     enemy1.spawn()
     player1.spawn()
 
