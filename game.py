@@ -4,62 +4,61 @@ import objects.player as player
 import objects.enemy as enemy
 from pygame.locals import *
 
+#Env Variables
 play = True
 displayWidth = 800
 displayHeight = 800
 displayDimensions = displayWidth, displayHeight
 
+#Start Pygame Engine
 pygame.init()
 gameDisplay = pygame.display.set_mode(displayDimensions)
 pygame.display.set_caption('Road Fighter')
 fpsClock = pygame.time.Clock()
 FPS = 120
 
+#Loading Images
 playerImage = pygame.image.load('./sprites/player.png')
 enemyImage = pygame.image.load('./sprites/enemy.png')
 roadImage = pygame.image.load('./sprites/road.png').convert()
 
-playerX = int(displayHeight / 2)
-playerY = int(displayWidth * 3/4)
-playerSpeed = 10
-roadSpeed = 0
+#Define Objects
+player1 = player.Player(gameDisplay, playerImage, displayDimensions)
+mainRoad = road.Road(gameDisplay, roadImage, displayHeight)
+enemy1 = enemy.Enemy(gameDisplay, enemyImage, 400, 400)
 
-enemyX = 400
-enemyY = 400
-enemyBrake = 0
-enemyEngine = 0
-enemyMaxSpeed = 15
-enemyCooldown = 1
-
+#Start Time
 last = pygame.time.get_ticks()
 
+#Catch Events
 def events():
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
 
+#Main Loop
 while play:
-    now = pygame.time.get_ticks()
+    #Engine Configs
+    now = pygame.time.get_ticks() 
     fpsClock.tick(FPS)
     events()
 
+    #Keyboard Controller
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and playerX > 220:
-        playerX -= playerSpeed
-    if keys[pygame.K_RIGHT] and playerX < 560:
-        playerX += playerSpeed
+    if keys[pygame.K_LEFT]:
+        player1.left()
+    if keys[pygame.K_RIGHT]:
+        player1.right()
     if keys[pygame.K_z]:
-        roadSpeed += 10
-        enemyY += 1
+        mainRoad.update(10)
+        enemy1.slow()
     else:
-        enemyY -= 3
+        enemy1.fast()
 
-    road.roadPrinter(gameDisplay, displayHeight, roadImage, roadSpeed)
+    #Spawn Objects
+    mainRoad.spawn()
+    enemy1.spawn()
+    player1.spawn()
 
-    if now - last >= enemyCooldown:
-        last = now
-        print("oi")
-        enemy.enemyPrinter(gameDisplay, enemyImage, enemyX, enemyY)
-
-    player.playerPrinter(gameDisplay, playerImage, playerX, playerY)
+    #Update Display
     pygame.display.update()
