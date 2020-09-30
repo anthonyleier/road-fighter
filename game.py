@@ -1,6 +1,7 @@
 import pygame
-import road
-import player
+import objects.road as road
+import objects.player as player
+import objects.enemy as enemy
 from pygame.locals import *
 
 play = True
@@ -15,10 +16,13 @@ fpsClock = pygame.time.Clock()
 FPS = 120
 
 playerImage = pygame.image.load('./sprites/player.png')
+enemyImage = pygame.image.load('./sprites/enemy.png')
 roadImage = pygame.image.load('./sprites/road.png').convert()
 
 playerX = int(displayHeight / 2)
 playerY = int(displayWidth * 3/4)
+enemyX = 400
+enemyY = 400
 playerSpeed = 10
 roadSpeed = 0
 
@@ -41,4 +45,5 @@ while play:
 
     road.roadPrinter(gameDisplay, displayHeight, roadImage, roadSpeed)
     player.playerPrinter(gameDisplay, playerImage, playerX, playerY)
+    enemy.enemyPrinter(gameDisplay, enemyImage, enemyX, enemyY)
     pygame.display.update()
