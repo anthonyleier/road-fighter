@@ -7,6 +7,7 @@ class Enemy:
         self.image = image
         self.positionX = random.randrange(220, 560)
         self.positionY = random.randrange(0, 800) * -1
+        self.rect = self.image.get_rect(topleft = (self.positionX, self.positionY))
 
     def fast(self):
         self.positionY -= 5
