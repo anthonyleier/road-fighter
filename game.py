@@ -18,6 +18,9 @@ fpsClock = pygame.time.Clock()
 FPS = 120
 
 #Loading Images
+menu = "menu"
+gameOver = "gameOver"
+
 playerImage = pygame.image.load('./sprites/player.png')
 enemyImage = pygame.image.load('./sprites/enemy.png')
 roadImage = pygame.image.load('./sprites/road.png').convert()

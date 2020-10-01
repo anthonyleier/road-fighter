@@ -1,4 +1,0 @@
-(2015, 98) - Esquerda Superior
-(2015, 993) - Esquerda Inferior
-(2655, 98) - Direita Superior
-(2655, 993) - Direita Inferior
