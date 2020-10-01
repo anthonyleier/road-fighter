@@ -1,25 +1,19 @@
 import pygame, random
-from pygame.locals import *
 
-class Enemy:
-    def __init__(self, gameDisplay, image):
-        self.gameDisplay = gameDisplay
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self, image):
+        super().__init__()
         self.image = image
-        self.positionX = random.randrange(220, 560)
-        self.positionY = random.randrange(0, 800) * -1
-        self.rect = self.image.get_rect(topleft = (self.positionX, self.positionY))
+        self.rect = self.image.get_rect()
+        self.posX = random.randrange(220, 560)
+        self.posY = random.randrange(0, 800) * -1
+        self.rect.center = [self.posX, self.posY]
 
-    def fast(self):
-        self.positionY -= 5
-    
-    def slow(self):
-        self.positionY += 4
-
-    def spawn(self):
-        self.gameDisplay.blit(self.image, (self.positionX, self.positionY))
-        self.recalculate()
+    def update(self, speed):
+        if self.posY > 900:
+            self.posX = random.randrange(220, 560)
+            self.posY = -100
+        self.speed = speed
+        self.posY += speed
+        self.rect.center = [self.posX, self.posY]
         
-    def recalculate(self):
-        if self.positionY > 800:
-            self.positionX = random.randrange(220, 560)
-            self.positionY = -100
