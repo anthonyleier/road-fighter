@@ -25,7 +25,10 @@ roadImage = pygame.image.load('./sprites/road.png').convert()
 #Define Objects
 player1 = Player(gameDisplay, playerImage, displayDimensions)
 road = Road(gameDisplay, roadImage, displayHeight)
-enemy1 = Enemy(gameDisplay, enemyImage, 400, 400)
+enemy1 = Enemy(gameDisplay, enemyImage)
+enemy2 = Enemy(gameDisplay, enemyImage)
+enemy3 = Enemy(gameDisplay, enemyImage)
+enemy4 = Enemy(gameDisplay, enemyImage)
 
 #Start Time
 last = pygame.time.get_ticks()
@@ -38,6 +41,7 @@ def events():
 
 #Main Loop
 while play:
+
     #Engine Configs
     now = pygame.time.get_ticks() 
     fpsClock.tick(FPS)
@@ -52,12 +56,21 @@ while play:
     if keys[pygame.K_z]:
         road.update(10)
         enemy1.slow()
+        enemy2.slow()
+        enemy3.slow()
+        enemy4.slow()
     else:
         enemy1.fast()
+        enemy2.fast()
+        enemy3.fast()
+        enemy4.fast()
 
     #Spawn Objects
     road.spawn()
     enemy1.spawn()
+    enemy2.spawn()
+    enemy3.spawn()
+    enemy4.spawn()
     player1.spawn()
 
     #Update Display

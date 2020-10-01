@@ -2,9 +2,8 @@ import pygame
 from pygame.locals import *
 
 class Road:
-    speed = 0
-
-    def __init__(self, gameDisplay, image, displayHeight):
+    def __init__(self, gameDisplay, image, displayHeight):      
+        self.speed = 0
         self.gameDisplay = gameDisplay
         self.image = image
         self.displayHeight = displayHeight
