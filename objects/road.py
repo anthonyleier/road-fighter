@@ -1,5 +1,4 @@
 import pygame
-from pygame.locals import *
 
 class Road:
     def __init__(self, image, display, displayHeight):      

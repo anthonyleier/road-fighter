@@ -12,7 +12,9 @@ class Player(pygame.sprite.Sprite):
 
     def update(self, direction):
         if direction == "right":
-            self.posX += self.speed
+            if self.posX < 580:
+                self.posX += self.speed
         else:
-            self.posX -= self.speed  
+            if self.posX > 240:
+                self.posX -= self.speed  
         self.rect.center = [self.posX, self.posY]
