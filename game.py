@@ -4,7 +4,7 @@ from objects.road import Road
 from objects.enemy import Enemy
 
 #Env Variables
-displayWidth = 800
+displayWidth = 1200
 displayHeight = 800
 gameIsStart = True
 gameIsOver = False
@@ -14,6 +14,13 @@ pygame.init()
 screen = pygame.display.set_mode((displayWidth, displayHeight))
 pygame.display.set_caption('Road Fighter')
 clock = pygame.time.Clock()
+
+#Texts
+pygame.font.init()
+myfont = pygame.font.Font('./sprites/font.ttf', 30)
+title = myfont.render('ROAD FIGTHER', False, (255, 255, 255))
+distance = 0
+fuel = 100
 
 #Loading Images
 playerImage = pygame.image.load('./sprites/player.png').convert_alpha()
@@ -54,8 +61,17 @@ def gameOver():
 
 #Main Loop
 while True:
+    screen.fill((0,0,0))
     events()
     clock.tick(60)
+
+    #StartScreen
+    if gameIsStart:
+        gameStart()
+
+    #EndScreen
+    if gameIsOver:
+        gameOver()
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RETURN]:
@@ -67,6 +83,7 @@ while True:
         players.update("right")
     if keys[pygame.K_z]:
         road.update(20)
+        distance += 1
         enemys.update(4)
     else:
         enemys.update(-5)
@@ -75,13 +92,22 @@ while True:
     enemys.draw(screen)
     players.draw(screen)
 
-    if gameIsStart:
-        gameStart()
+    
 
     if pygame.sprite.spritecollide(player1, enemys, False):
         gameIsOver = True
 
-    if gameIsOver:
-        gameOver()
+    
+    distanceText1 = myfont.render('DISTANCE:', False, (255, 255, 255))
+    distanceText2 = myfont.render(str(distance), False, (255, 255, 255))
+    fuelText1 = myfont.render('FUEL:', False, (255, 255, 255))
+    fuelText2 = myfont.render(str(fuel), False, (255, 255, 255))
 
+    margin = 820
+    
+    screen.blit(title, (margin, 100))
+    screen.blit(distanceText1, (margin, 300))
+    screen.blit(distanceText2, (margin, 350))
+    screen.blit(fuelText1, (margin, 500))
+    screen.blit(fuelText2, (margin, 550))
     pygame.display.flip()
