@@ -73,6 +73,7 @@ while True:
     if gameIsOver:
         gameOver()
 
+    #Controller
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RETURN]:
         gameIsStart = False
@@ -88,26 +89,26 @@ while True:
     else:
         enemys.update(-5)
 
+    #Spawn
     road.spawn()
     enemys.draw(screen)
     players.draw(screen)
 
-    
-
+    #Colliders
     if pygame.sprite.spritecollide(player1, enemys, False):
         gameIsOver = True
 
-    
+    #HUD
     distanceText1 = myfont.render('DISTANCE:', False, (255, 255, 255))
     distanceText2 = myfont.render(str(distance), False, (255, 255, 255))
     fuelText1 = myfont.render('FUEL:', False, (255, 255, 255))
     fuelText2 = myfont.render(str(fuel), False, (255, 255, 255))
 
     margin = 820
-    
     screen.blit(title, (margin, 100))
     screen.blit(distanceText1, (margin, 300))
     screen.blit(distanceText2, (margin, 350))
     screen.blit(fuelText1, (margin, 500))
     screen.blit(fuelText2, (margin, 550))
+
     pygame.display.flip()
