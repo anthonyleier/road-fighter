@@ -12,7 +12,7 @@ class Enemy(pygame.sprite.Sprite):
     def update(self, speed):
         if self.posY > 900:
             self.posX = random.randrange(240, 580)
-            self.posY = -100
+            self.posY = random.randrange(0, 100) * -1
         self.speed = speed
         self.posY += speed
         self.rect.center = [self.posX, self.posY]

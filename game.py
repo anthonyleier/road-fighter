@@ -88,7 +88,6 @@ while True:
 
     #Colliders
     if pygame.sprite.spritecollide(player1, enemys, False):
-        print("Bateu")
         gameIsOver = True
 
     #HUD
