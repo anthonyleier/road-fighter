@@ -65,14 +65,6 @@ while True:
     events()
     clock.tick(60)
 
-    #StartScreen
-    if gameIsStart:
-        gameStart()
-
-    #EndScreen
-    if gameIsOver:
-        gameOver()
-
     #Controller
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RETURN]:
@@ -96,6 +88,7 @@ while True:
 
     #Colliders
     if pygame.sprite.spritecollide(player1, enemys, False):
+        print("Bateu")
         gameIsOver = True
 
     #HUD
@@ -110,5 +103,15 @@ while True:
     screen.blit(distanceText2, (margin, 350))
     screen.blit(fuelText1, (margin, 500))
     screen.blit(fuelText2, (margin, 550))
+
+    #StartScreen
+    if gameIsStart:
+        gameStart()
+
+    #EndScreen
+    if gameIsOver:
+        gameOver()
+        distance = 0
+        fuel = 0
 
     pygame.display.flip()
