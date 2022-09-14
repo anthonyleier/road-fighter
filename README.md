@@ -13,7 +13,3 @@ python game.py
 ## Preview
 
 ![Preview do Aplicativo](./sprites/preview.png)
-
-## Licença
-
-[MIT](https://choosealicense.com/licenses/mit/)
