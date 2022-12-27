@@ -92,7 +92,7 @@ def drawHUD(screen, texts):
     fuelText1 = texts.render('FUEL:', False, (255, 255, 255))
     fuelText2 = texts.render(str(fuel), False, (255, 255, 255))
 
-    margin = 820
+    margin = DISPLAY_WIDTH * 0.683
     screen.blit(title, (margin, 100))
     screen.blit(distanceText1, (margin, 300))
     screen.blit(distanceText2, (margin, 350))
