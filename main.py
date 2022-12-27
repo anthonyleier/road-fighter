@@ -3,6 +3,7 @@ import pygame
 from game import startGame
 from objects.road import Road
 from dotenv import load_dotenv
+from functions import displayScreen
 from functions import loadPlayer, loadEnemies
 from functions import startEngine, startTexts
 
@@ -22,8 +23,10 @@ if __name__ == "__main__":
     screenStart = pygame.image.load('./screens/start.png').convert()
     screenEnd = pygame.image.load('./screens/end.png').convert()
 
-    player = loadPlayer(playerImage)
+    player, playerGroup = loadPlayer(playerImage)
     enemies = loadEnemies(enemyImage)
     road = Road(roadImage, screen, DISPLAY_HEIGHT)
 
-    startGame(screen, clock, texts, player, enemies, road)
+    displayScreen(screen, screenStart)
+    startGame(screen, clock, texts, player, playerGroup, enemies, road)
+    displayScreen(screen, screenEnd)

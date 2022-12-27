@@ -11,6 +11,10 @@ DISPLAY_WIDTH = int(os.environ.get('DISPLAY_WIDTH'))
 DISPLAY_HEIGHT = int(os.environ.get('DISPLAY_HEIGHT'))
 
 
+distance = 0
+fuel = 100
+
+
 def startEngine():
     pygame.init()
     screen = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
@@ -26,10 +30,10 @@ def startTexts():
 
 
 def loadPlayer(playerImage):
-    playerSprite = Player(playerImage, 400, 600, 5)
-    player = pygame.sprite.Group()
-    player.add(playerSprite)
-    return player, playerSprite
+    player = Player(playerImage, 400, 600, 5)
+    playerGroup = pygame.sprite.Group()
+    playerGroup.add(player)
+    return player, playerGroup
 
 
 def loadEnemies(enemyImage):
@@ -69,7 +73,7 @@ def catchControllerEvents(player, road, enemies):
 
     if keys[pygame.K_z]:
         road.update(20)
-        distance += 1
+        # distance += 1
         enemies.update(4)
 
     else:
@@ -77,11 +81,11 @@ def catchControllerEvents(player, road, enemies):
 
 
 def catchCollisions(player, enemies):
-    collision = pygame.sprite.spritecollide(enemies, player[0], False)
+    collision = pygame.sprite.spritecollide(player, enemies, False)
     return collision
 
 
-def drawHUD(screen, texts, distance, fuel):
+def drawHUD(screen, texts):
     title = texts.render('ROAD FIGTHER', False, (255, 255, 255))
     distanceText1 = texts.render('DISTANCE:', False, (255, 255, 255))
     distanceText2 = texts.render(str(distance), False, (255, 255, 255))

@@ -4,11 +4,9 @@ from functions import catchEvents, catchControllerEvents, catchCollisions, drawH
 
 gameStart = True
 gameOver = False
-distance = 0
-fuel = 100
 
 
-def startGame(screen, clock, texts, player, enemies, road):
+def startGame(screen, clock, texts, player, playerGroup, enemies, road):
     while True:
         catchEvents()
 
@@ -16,18 +14,21 @@ def startGame(screen, clock, texts, player, enemies, road):
         screen.fill((0, 0, 0))
         clock.tick(60)
 
+        # HUD
+        drawHUD(screen, texts)
+
         # Controller
         catchControllerEvents(player, road, enemies)
 
         # Spawn
         road.spawn()
         enemies.draw(screen)
-        player[0].draw(screen)
+        playerGroup.draw(screen)
 
         # Colliders
-        # gameOver = catchCollisions(player, enemies)
+        collision = catchCollisions(player, enemies)
 
-        # HUD
-        drawHUD(screen, texts, distance, fuel)
+        if collision:
+            return
 
         pygame.display.flip()
