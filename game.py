@@ -1,34 +1,40 @@
 import pygame
-from functions import catchEvents, catchControllerEvents, catchCollisions, drawHUD
-
-
-gameStart = True
-gameOver = False
+from functions import catchEvents, catchControllerEvents, catchCollisions, drawHUD, displayScreen
 
 
 def startGame(screen, clock, texts, player, playerGroup, enemies, road):
-    while True:
-        catchEvents()
+    gameStart = False
+    gameOver = False
+    screenStart = pygame.image.load('./screens/start.png').convert()
+    screenEnd = pygame.image.load('./screens/end.png').convert()
 
+    while True:
         # Initial config
         screen.fill((0, 0, 0))
         clock.tick(60)
 
-        # HUD
-        drawHUD(screen, texts)
+        if not gameStart:
+            displayScreen(screen, screenStart)
 
-        # Controller
-        catchControllerEvents(player, road, enemies)
+        elif gameOver:
+            displayScreen(screen, screenEnd)
 
-        # Spawn
-        road.spawn()
-        enemies.draw(screen)
-        playerGroup.draw(screen)
+        else:
+            # Catch Events
+            catchEvents()
 
-        # Colliders
-        collision = catchCollisions(player, enemies)
+            # HUD
+            drawHUD(screen, texts)
 
-        if collision:
-            return
+            # Controller
+            gameStart = catchControllerEvents(player, road, enemies)
+
+            # Spawn
+            road.spawn()
+            enemies.draw(screen)
+            playerGroup.draw(screen)
+
+            # Colliders
+            gameOver = catchCollisions(player, enemies)
 
         pygame.display.flip()

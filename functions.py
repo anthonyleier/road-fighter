@@ -58,12 +58,17 @@ def catchEvents():
             sys.exit()
 
 
-def displayScreen(sprite, screen):
-    screen.blit(sprite, (0, 0))
+def displayScreen(screen, screenStart):
+    screen.blit(screenStart, (0, 0))
 
 
 def catchControllerEvents(player, road, enemies):
     keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_RETURN]:
+        gameStart = True
+        print('opa')
+        return gameStart
 
     if keys[pygame.K_LEFT]:
         player.update("left")

@@ -20,13 +20,9 @@ if __name__ == "__main__":
     playerImage = pygame.image.load('./sprites/player.png').convert_alpha()
     enemyImage = pygame.image.load('./sprites/enemy.png').convert_alpha()
     roadImage = pygame.image.load('./sprites/road.png').convert()
-    screenStart = pygame.image.load('./screens/start.png').convert()
-    screenEnd = pygame.image.load('./screens/end.png').convert()
 
     player, playerGroup = loadPlayer(playerImage)
     enemies = loadEnemies(enemyImage)
     road = Road(roadImage, screen, DISPLAY_HEIGHT)
 
-    displayScreen(screen, screenStart)
     startGame(screen, clock, texts, player, playerGroup, enemies, road)
-    displayScreen(screen, screenEnd)
