@@ -29,18 +29,18 @@ def startTexts():
     return texts
 
 
-def loadPlayer(playerImage):
-    player = Player(playerImage, 400, 600, 5)
+def loadPlayerGroup():
+    player = Player(400, 600, 5)
     playerGroup = pygame.sprite.Group()
     playerGroup.add(player)
-    return player, playerGroup
+    return playerGroup
 
 
-def loadEnemies(enemyImage):
-    enemy1 = Enemy(enemyImage)
-    enemy2 = Enemy(enemyImage)
-    enemy3 = Enemy(enemyImage)
-    enemy4 = Enemy(enemyImage)
+def loadEnemiesGroup():
+    enemy1 = Enemy()
+    enemy2 = Enemy()
+    enemy3 = Enemy()
+    enemy4 = Enemy()
 
     enemies = pygame.sprite.Group()
     enemies.add(enemy1)

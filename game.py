@@ -2,19 +2,21 @@ import pygame
 from functions import catchEvents, catchControllerEvents, catchCollisions, drawHUD, displayScreen
 
 
-def runGame(screen, clock, texts, player, playerGroup, enemies, road):
+def runGame(screen, clock, texts, playerGroup, enemiesGroup, road):
+    playerSprite = playerGroup.sprites()[0]
+
     gameRunning = False
     gameOver = False
+
     screenStart = pygame.image.load('./screens/start.png').convert()
     screenEnd = pygame.image.load('./screens/end.png').convert()
 
     while True:
-        # Configure frame
         screen.fill((0, 0, 0))
         clock.tick(60)
 
         catchEvents()
-        playPressed = catchControllerEvents(player, road, enemies)
+        playPressed = catchControllerEvents(playerSprite, road, enemiesGroup)
 
         if playPressed and not gameRunning:
             gameRunning = True
@@ -28,10 +30,10 @@ def runGame(screen, clock, texts, player, playerGroup, enemies, road):
         if gameRunning and not gameOver:
             drawHUD(screen, texts)
 
-            road.spawn()
-            enemies.draw(screen)
+            road.draw()
+            enemiesGroup.draw(screen)
             playerGroup.draw(screen)
 
-            gameOver = catchCollisions(player, enemies)
+            gameOver = catchCollisions(playerSprite, enemiesGroup)
 
         pygame.display.flip()
