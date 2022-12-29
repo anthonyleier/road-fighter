@@ -60,7 +60,8 @@ def catchEvents():
 
 
 def displayScreen(screen, image):
-    screen.blit(image, (0, 0))
+    width = image.get_width()
+    screen.blit(image, (width*0.25, 0))
 
 
 def catchControllerEvents(road, playerSprite, enemiesGroup, fuelsGroup):
