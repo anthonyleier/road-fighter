@@ -1,7 +1,8 @@
 import pygame
 from time import sleep
+from functions import drawHUD, displayScreen, addFuel
+from functions import catchEvents, catchControllerEvents, catchCollisions, catchFuel
 from sounds import startingMusic, endingMusic, emptyFuelSound, motorIdle, motorAccelerated, stopAllSounds
-from functions import catchEvents, catchControllerEvents, catchCollisions, drawHUD, displayScreen, catchFuel
 
 
 def runGame(screen, clock, texts, playerGroup, enemiesGroup, fuelsGroup, road):
@@ -86,12 +87,7 @@ def runGame(screen, clock, texts, playerGroup, enemiesGroup, fuelsGroup, road):
             moreFuel = catchFuel(playerSprite, fuelsGroup)
 
             # Add fuel logic
-            if moreFuel:
-                if fuel < 100:
-                    fuel += 10
-
-                if fuel > 100:
-                    fuel = 100
+            fuel = addFuel(fuel, moreFuel)
 
             # Endgame if fuel is empty
             if fuel <= 0:

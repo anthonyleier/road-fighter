@@ -1,12 +1,10 @@
 import os
 import sys
 import pygame
-
 from dotenv import load_dotenv
 from classes.fuel import Fuel
 from classes.enemy import Enemy
 from classes.player import Player
-
 from sounds import explosionSound, collectFuelSound
 
 
@@ -125,3 +123,13 @@ def drawHUD(screen, texts, distance, fuel):
     screen.blit(distanceText2, (margin, 350))
     screen.blit(fuelText1, (margin, 500))
     screen.blit(fuelText2, (margin, 550))
+
+
+def addFuel(fuel, moreFuel):
+    if moreFuel:
+        if fuel < 100:
+            fuel += 10
+
+        if fuel > 100:
+            fuel = 100
+    return fuel
