@@ -66,9 +66,8 @@ def catchControllerEvents(player, road, enemies):
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_RETURN]:
-        gameStart = True
-        print('opa')
-        return gameStart
+        gameRunning = True
+        return gameRunning
 
     if keys[pygame.K_LEFT]:
         player.update("left")

@@ -1,6 +1,6 @@
 import os
 import pygame
-from game import startGame
+from game import runGame
 from objects.road import Road
 from dotenv import load_dotenv
 from functions import displayScreen
@@ -25,4 +25,4 @@ if __name__ == "__main__":
     enemies = loadEnemies(enemyImage)
     road = Road(roadImage, screen, DISPLAY_HEIGHT)
 
-    startGame(screen, clock, texts, player, playerGroup, enemies, road)
+    runGame(screen, clock, texts, player, playerGroup, enemies, road)
