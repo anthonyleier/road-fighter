@@ -2,17 +2,16 @@ import os
 import sys
 import pygame
 from dotenv import load_dotenv
-from objects.enemy import Enemy
-from objects.player import Player
+from classes.fuel import Fuel
+from classes.enemy import Enemy
+from classes.player import Player
 
 
 load_dotenv()
 DISPLAY_WIDTH = int(os.environ.get('DISPLAY_WIDTH'))
 DISPLAY_HEIGHT = int(os.environ.get('DISPLAY_HEIGHT'))
-
-
-distance = 0
-fuel = 100
+QTY_ENEMIES = int(os.environ.get('QTY_ENEMIES'))
+QTY_FUEL = int(os.environ.get('QTY_FUEL'))
 
 
 def startEngine():
@@ -25,7 +24,7 @@ def startEngine():
 
 def startTexts():
     pygame.font.init()
-    texts = pygame.font.Font('./sprites/font.ttf', 30)
+    texts = pygame.font.Font('sprites/font.ttf', 30)
     return texts
 
 
@@ -37,18 +36,17 @@ def loadPlayerGroup():
 
 
 def loadEnemiesGroup():
-    enemy1 = Enemy()
-    enemy2 = Enemy()
-    enemy3 = Enemy()
-    enemy4 = Enemy()
+    enemiesGroup = pygame.sprite.Group()
+    for _ in range(QTY_ENEMIES):
+        enemiesGroup.add(Enemy())
+    return enemiesGroup
 
-    enemies = pygame.sprite.Group()
-    enemies.add(enemy1)
-    enemies.add(enemy2)
-    enemies.add(enemy3)
-    enemies.add(enemy4)
 
-    return enemies
+def loadFuelsGroup():
+    fuelsGroup = pygame.sprite.Group()
+    for _ in range(QTY_FUEL):
+        fuelsGroup.add(Fuel())
+    return fuelsGroup
 
 
 def catchEvents():
@@ -58,38 +56,56 @@ def catchEvents():
             sys.exit()
 
 
-def displayScreen(screen, screenStart):
-    screen.blit(screenStart, (0, 0))
+def displayScreen(screen, image):
+    screen.blit(image, (0, 0))
 
 
-def catchControllerEvents(player, road, enemies):
+def catchControllerEvents(road, playerSprite, enemiesGroup, fuelsGroup):
     keys = pygame.key.get_pressed()
+    playPressed = False
+    accelerated = False
+
+    if keys[pygame.K_ESCAPE]:
+        pygame.quit()
+        sys.exit()
 
     if keys[pygame.K_RETURN]:
-        gameRunning = True
-        return gameRunning
+        playPressed = True
 
     if keys[pygame.K_LEFT]:
-        player.update("left")
+        playerSprite.update("left")
 
     if keys[pygame.K_RIGHT]:
-        player.update("right")
+        playerSprite.update("right")
 
     if keys[pygame.K_z]:
         road.update(20)
-        # distance += 1
-        enemies.update(4)
+        enemiesGroup.update(4)
+        fuelsGroup.update(4)
+        accelerated = True
 
     else:
-        enemies.update(-5)
+        enemiesGroup.update(-5)
+        fuelsGroup.update(-5)
+
+    return playPressed, accelerated
 
 
-def catchCollisions(player, enemies):
-    collision = pygame.sprite.spritecollide(player, enemies, False)
+def catchCollisions(playerSprite, enemiesGroup):
+    collision = pygame.sprite.spritecollide(playerSprite, enemiesGroup, False)
     return collision
 
 
-def drawHUD(screen, texts):
+def catchFuel(playerSprite, fuelsGroup):
+    moreFuel = pygame.sprite.spritecollide(playerSprite, fuelsGroup, False)
+    if moreFuel:
+        for fuel in fuelsGroup.sprites():
+            fuel.posY = 5000
+    return moreFuel
+
+
+def drawHUD(screen, texts, distance, fuel):
+    fuel = int(fuel)
     title = texts.render('ROAD FIGTHER', False, (255, 255, 255))
     distanceText1 = texts.render('DISTANCE:', False, (255, 255, 255))
     distanceText2 = texts.render(str(distance), False, (255, 255, 255))

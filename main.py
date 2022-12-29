@@ -1,7 +1,7 @@
 from game import runGame
-from objects.road import Road
-from functions import loadPlayerGroup, loadEnemiesGroup
+from classes.road import Road
 from functions import startEngine, startTexts
+from functions import loadPlayerGroup, loadEnemiesGroup, loadFuelsGroup
 
 
 if __name__ == "__main__":
@@ -10,6 +10,7 @@ if __name__ == "__main__":
 
     playerGroup = loadPlayerGroup()
     enemiesGroup = loadEnemiesGroup()
+    fuelGroup = loadFuelsGroup()
     road = Road(screen)
 
-    runGame(screen, clock, texts, playerGroup, enemiesGroup, road)
+    runGame(screen, clock, texts, playerGroup, enemiesGroup, fuelGroup, road)

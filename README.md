@@ -12,4 +12,4 @@ python game.py
 
 ## Preview
 
-![Preview do Aplicativo](./sprites/preview.png)
+![Preview do Aplicativo](sprites/preview.png)
