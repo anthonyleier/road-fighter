@@ -1,5 +1,6 @@
 import pygame
 
+
 pygame.init()
 explosionSound = pygame.mixer.Sound('sounds/explosion.wav')
 collectFuelSound = pygame.mixer.Sound('sounds/fuel.wav')
