@@ -1,13 +1,21 @@
 # Road Fighter
 
-Desenvolvimento de uma versão endless do famoso jogo de nintendinho Road Fighter.
+Desenvolvimento de uma versão endless do famoso jogo de NES Road Fighter.
 
-## Requisitos
+## Instalação
 
-Para rodar o game, é necessário ter o Python e Pygame instalados.
+Para realizar a instalação, é necessário ativar o ambiente virtual e instalar as bibliotecas necessárias.
 
 ```bash
-python game.py
+python -m venv venv
+
+pip install -r requirements.txt
+```
+
+Com a instalação realizada no ambiente virtual ativado, é possível executar o jogo através do arquivo main.
+
+```bash
+python main.py
 ```
 
 ## Preview
