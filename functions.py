@@ -1,10 +1,13 @@
 import os
 import sys
 import pygame
+
 from dotenv import load_dotenv
 from classes.fuel import Fuel
 from classes.enemy import Enemy
 from classes.player import Player
+
+from sounds import explosionSound, collectFuelSound
 
 
 load_dotenv()
@@ -93,12 +96,15 @@ def catchControllerEvents(road, playerSprite, enemiesGroup, fuelsGroup):
 
 def catchCollisions(playerSprite, enemiesGroup):
     collision = pygame.sprite.spritecollide(playerSprite, enemiesGroup, False)
+    if collision:
+        explosionSound.play()
     return collision
 
 
 def catchFuel(playerSprite, fuelsGroup):
     moreFuel = pygame.sprite.spritecollide(playerSprite, fuelsGroup, False)
     if moreFuel:
+        collectFuelSound.play()
         for fuel in fuelsGroup.sprites():
             fuel.posY = 5000
     return moreFuel

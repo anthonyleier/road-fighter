@@ -1,5 +1,6 @@
 import pygame
 from functions import catchEvents, catchControllerEvents, catchCollisions, drawHUD, displayScreen, catchFuel
+from sounds import startingMusic, endingMusic, emptyFuelSound
 
 
 def runGame(screen, clock, texts, playerGroup, enemiesGroup, fuelsGroup, road):
@@ -9,10 +10,14 @@ def runGame(screen, clock, texts, playerGroup, enemiesGroup, fuelsGroup, road):
     gameOver = False
     moreFuel = False
     distance = 0
-    fuel = 100
+    fuel = 30
 
     screenStart = pygame.image.load('screens/start.png').convert()
     screenEnd = pygame.image.load('screens/end.png').convert()
+
+    playingEndingMusic = False
+    playingFuelSound = False
+    startingMusic.play()
 
     while True:
         screen.fill((0, 0, 0))
@@ -33,6 +38,9 @@ def runGame(screen, clock, texts, playerGroup, enemiesGroup, fuelsGroup, road):
 
         if gameOver:
             displayScreen(screen, screenEnd)
+            if not playingEndingMusic:
+                endingMusic.play()
+                playingEndingMusic = True
 
         if gameRunning and not gameOver:
             drawHUD(screen, texts, distance, fuel)
@@ -54,5 +62,13 @@ def runGame(screen, clock, texts, playerGroup, enemiesGroup, fuelsGroup, road):
 
         if fuel <= 0:
             gameOver = True
+
+        if fuel <= 20 and not playingFuelSound:
+            emptyFuelSound.play()
+            playingFuelSound = True
+
+        if fuel > 20:
+            emptyFuelSound.stop()
+            playingFuelSound = False
 
         pygame.display.flip()
