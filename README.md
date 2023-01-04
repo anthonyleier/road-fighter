@@ -14,8 +14,6 @@ Desenvolvimento de uma versão endless do famoso jogo de NES Road Fighter.
 
 ## Instalação
 
-O jogo pode ser iniciado através do arquivo executável "play.exe", ou também instalado para ser executado pelo Python localmente.
-
 Para realizar a instalação pelo Python, é necessário ativar o ambiente virtual e instalar as bibliotecas necessárias.
 
 ```bash
