@@ -105,7 +105,7 @@ def catchFuel(playerSprite, fuelsGroup):
     if moreFuel:
         collectFuelSound.play()
         for fuel in fuelsGroup.sprites():
-            fuel.posY = 5000
+            fuel.posY = -2500
     return moreFuel
 
 
@@ -128,7 +128,7 @@ def drawHUD(screen, texts, distance, fuel):
 def addFuel(fuel, moreFuel):
     if moreFuel:
         if fuel < 100:
-            fuel += 10
+            fuel += 30
 
         if fuel > 100:
             fuel = 100
