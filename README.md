@@ -2,6 +2,16 @@
 
 Desenvolvimento de uma versão endless do famoso jogo de NES Road Fighter.
 
+## Comandos
+
+| Comando  | Tecla |
+| -------- | ----- |
+| Start    | Enter |
+| Acelerar | Z     |
+| Sair     | ESC   |
+| Esquerda | <-    |
+| Direita  | ->    |
+
 ## Instalação
 
 Para realizar a instalação, é necessário ativar o ambiente virtual e instalar as bibliotecas necessárias.
