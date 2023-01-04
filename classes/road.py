@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
-DISPLAY_HEIGHT = int(os.environ.get('DISPLAY_HEIGHT'))
+DISPLAY_HEIGHT = int(os.environ.get('DISPLAY_HEIGHT', 800))
 
 
 class Road:

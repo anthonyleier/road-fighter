@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
-GAME_BORDER_RIGHT = int(os.environ.get('GAME_BORDER_RIGHT'))
-GAME_BORDER_LEFT = int(os.environ.get('GAME_BORDER_LEFT'))
+GAME_BORDER_RIGHT = int(os.environ.get('GAME_BORDER_RIGHT', 240))
+GAME_BORDER_LEFT = int(os.environ.get('GAME_BORDER_LEFT', 580))
 
 
 class Fuel(pygame.sprite.Sprite):

@@ -9,10 +9,10 @@ from sounds import explosionSound, collectFuelSound
 
 
 load_dotenv()
-DISPLAY_WIDTH = int(os.environ.get('DISPLAY_WIDTH'))
-DISPLAY_HEIGHT = int(os.environ.get('DISPLAY_HEIGHT'))
-QTY_ENEMIES = int(os.environ.get('QTY_ENEMIES'))
-QTY_FUEL = int(os.environ.get('QTY_FUEL'))
+DISPLAY_WIDTH = int(os.environ.get('DISPLAY_WIDTH', 1200))
+DISPLAY_HEIGHT = int(os.environ.get('DISPLAY_HEIGHT', 800))
+QTY_ENEMIES = int(os.environ.get('QTY_ENEMIES', 5))
+QTY_FUEL = int(os.environ.get('QTY_FUEL', 1))
 
 
 def startEngine():
